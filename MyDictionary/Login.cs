@@ -44,7 +44,11 @@ namespace MyDictionary
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Comming soon...");
+            var menu = new Menu(this);
+
+
+            Hide();
+            changeForm(menu);
         }
 
         private void registerLb_Click(object sender, EventArgs e)

@@ -99,7 +99,7 @@
             loginBtn.FlatStyle = FlatStyle.Flat;
             loginBtn.Font = new Font("Lucida Sans", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             loginBtn.ForeColor = Color.Black;
-            loginBtn.Location = new Point(155, 329);
+            loginBtn.Location = new Point(152, 313);
             loginBtn.Name = "loginBtn";
             loginBtn.Size = new Size(130, 37);
             loginBtn.TabIndex = 3;
@@ -142,7 +142,7 @@
             loginTb.Multiline = true;
             loginTb.Name = "loginTb";
             loginTb.PlaceholderText = "Enter login";
-            loginTb.Size = new Size(275, 32);
+            loginTb.Size = new Size(275, 35);
             loginTb.TabIndex = 2;
             // 
             // passwordPicture
@@ -162,7 +162,7 @@
             forgotLb.AutoSize = true;
             forgotLb.Cursor = Cursors.Hand;
             forgotLb.Font = new Font("Lucida Sans", 14.25F, FontStyle.Underline, GraphicsUnit.Point, 0);
-            forgotLb.Location = new Point(135, 419);
+            forgotLb.Location = new Point(137, 475);
             forgotLb.Name = "forgotLb";
             forgotLb.Size = new Size(176, 22);
             forgotLb.TabIndex = 9;
@@ -174,7 +174,7 @@
             registerLb.AutoSize = true;
             registerLb.Cursor = Cursors.Hand;
             registerLb.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            registerLb.Location = new Point(180, 369);
+            registerLb.Location = new Point(178, 353);
             registerLb.Name = "registerLb";
             registerLb.Size = new Size(82, 17);
             registerLb.TabIndex = 10;
@@ -185,7 +185,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(431, 450);
+            ClientSize = new Size(431, 503);
             Controls.Add(registerLb);
             Controls.Add(forgotLb);
             Controls.Add(passwordPicture);

@@ -56,7 +56,7 @@
             loginLb.AutoSize = true;
             loginLb.Cursor = Cursors.Hand;
             loginLb.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            loginLb.Location = new Point(337, 394);
+            loginLb.Location = new Point(334, 393);
             loginLb.Name = "loginLb";
             loginLb.Size = new Size(66, 17);
             loginLb.TabIndex = 12;
@@ -67,9 +67,9 @@
             // 
             registerBtn.Cursor = Cursors.Hand;
             registerBtn.FlatStyle = FlatStyle.Flat;
-            registerBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            registerBtn.Font = new Font("Lucida Sans", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             registerBtn.ForeColor = Color.Black;
-            registerBtn.Location = new Point(299, 357);
+            registerBtn.Location = new Point(296, 356);
             registerBtn.Name = "registerBtn";
             registerBtn.Size = new Size(144, 34);
             registerBtn.TabIndex = 11;
