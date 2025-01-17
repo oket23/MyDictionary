@@ -57,5 +57,10 @@ namespace MyDictionary
         {
 
         }
+
+        private void loginLb_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

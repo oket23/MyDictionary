@@ -55,10 +55,10 @@
             // 
             loginLb.AutoSize = true;
             loginLb.Cursor = Cursors.Hand;
-            loginLb.Font = new Font("Sylfaen", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            loginLb.Location = new Point(345, 348);
+            loginLb.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            loginLb.Location = new Point(337, 394);
             loginLb.Name = "loginLb";
-            loginLb.Size = new Size(54, 19);
+            loginLb.Size = new Size(66, 17);
             loginLb.TabIndex = 12;
             loginLb.Text = "or login";
             loginLb.Click += loginLb_Click;
@@ -67,9 +67,9 @@
             // 
             registerBtn.Cursor = Cursors.Hand;
             registerBtn.FlatStyle = FlatStyle.Flat;
-            registerBtn.Font = new Font("Sylfaen", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            registerBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             registerBtn.ForeColor = Color.Black;
-            registerBtn.Location = new Point(299, 311);
+            registerBtn.Location = new Point(299, 357);
             registerBtn.Name = "registerBtn";
             registerBtn.Size = new Size(144, 34);
             registerBtn.TabIndex = 11;
@@ -83,18 +83,18 @@
             panel1.Controls.Add(registerLb);
             panel1.Location = new Point(-4, -4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(727, 135);
+            panel1.Size = new Size(727, 130);
             panel1.TabIndex = 13;
             // 
             // registerLb
             // 
             registerLb.AutoSize = true;
             registerLb.BackColor = Color.Black;
-            registerLb.Font = new Font("Gill Sans MT", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            registerLb.Font = new Font("Lucida Sans", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             registerLb.ForeColor = Color.White;
-            registerLb.Location = new Point(282, 37);
+            registerLb.Location = new Point(287, 43);
             registerLb.Name = "registerLb";
-            registerLb.Size = new Size(165, 52);
+            registerLb.Size = new Size(176, 42);
             registerLb.TabIndex = 10;
             registerLb.Text = "Register";
             registerLb.TextAlign = ContentAlignment.MiddleCenter;
@@ -103,7 +103,7 @@
             // 
             passwordPicture.Cursor = Cursors.Hand;
             passwordPicture.Image = Properties.Resources.closePassword;
-            passwordPicture.Location = new Point(657, 177);
+            passwordPicture.Location = new Point(680, 182);
             passwordPicture.Name = "passwordPicture";
             passwordPicture.Size = new Size(20, 20);
             passwordPicture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -114,7 +114,7 @@
             // panel3
             // 
             panel3.BackColor = Color.Black;
-            panel3.Location = new Point(402, 204);
+            panel3.Location = new Point(399, 204);
             panel3.Name = "panel3";
             panel3.Size = new Size(275, 3);
             panel3.TabIndex = 19;
@@ -131,33 +131,33 @@
             // 
             loginTb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             loginTb.BorderStyle = BorderStyle.None;
-            loginTb.Font = new Font("SimSun", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            loginTb.Location = new Point(57, 169);
+            loginTb.Font = new Font("Lucida Sans", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            loginTb.Location = new Point(54, 175);
             loginTb.MaxLength = 20;
             loginTb.Multiline = true;
             loginTb.Name = "loginTb";
             loginTb.PlaceholderText = "Enter login";
-            loginTb.Size = new Size(253, 29);
+            loginTb.Size = new Size(275, 29);
             loginTb.TabIndex = 16;
             // 
             // passwordTb
             // 
             passwordTb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             passwordTb.BorderStyle = BorderStyle.None;
-            passwordTb.Font = new Font("SimSun", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passwordTb.Location = new Point(405, 169);
+            passwordTb.Font = new Font("Lucida Sans", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            passwordTb.Location = new Point(399, 178);
             passwordTb.MaxLength = 20;
             passwordTb.Multiline = true;
             passwordTb.Name = "passwordTb";
             passwordTb.PasswordChar = '*';
             passwordTb.PlaceholderText = "Enter password";
-            passwordTb.Size = new Size(249, 29);
+            passwordTb.Size = new Size(282, 26);
             passwordTb.TabIndex = 17;
             // 
             // passwordKeyPicture
             // 
             passwordKeyPicture.Image = Properties.Resources.password;
-            passwordKeyPicture.Location = new Point(367, 169);
+            passwordKeyPicture.Location = new Point(358, 172);
             passwordKeyPicture.Name = "passwordKeyPicture";
             passwordKeyPicture.Size = new Size(32, 32);
             passwordKeyPicture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -167,7 +167,7 @@
             // loginPicrture
             // 
             loginPicrture.Image = Properties.Resources.login;
-            loginPicrture.Location = new Point(19, 169);
+            loginPicrture.Location = new Point(16, 172);
             loginPicrture.Name = "loginPicrture";
             loginPicrture.Size = new Size(32, 32);
             loginPicrture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -186,14 +186,14 @@
             // 
             passwordAgainTb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             passwordAgainTb.BorderStyle = BorderStyle.None;
-            passwordAgainTb.Font = new Font("SimSun", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            passwordAgainTb.Location = new Point(399, 236);
+            passwordAgainTb.Font = new Font("Lucida Sans", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            passwordAgainTb.Location = new Point(399, 242);
             passwordAgainTb.MaxLength = 20;
             passwordAgainTb.Multiline = true;
             passwordAgainTb.Name = "passwordAgainTb";
             passwordAgainTb.PasswordChar = '*';
             passwordAgainTb.PlaceholderText = "Enter password again";
-            passwordAgainTb.Size = new Size(249, 25);
+            passwordAgainTb.Size = new Size(282, 28);
             passwordAgainTb.TabIndex = 22;
             // 
             // panel5
@@ -207,7 +207,7 @@
             // bDayPicture
             // 
             bDayPicture.Image = Properties.Resources.date;
-            bDayPicture.Location = new Point(19, 235);
+            bDayPicture.Location = new Point(16, 236);
             bDayPicture.Name = "bDayPicture";
             bDayPicture.Size = new Size(32, 32);
             bDayPicture.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -223,14 +223,14 @@
             bDayDTP.MaxDate = new DateTime(2030, 12, 31, 0, 0, 0, 0);
             bDayDTP.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             bDayDTP.Name = "bDayDTP";
-            bDayDTP.Size = new Size(253, 29);
+            bDayDTP.Size = new Size(272, 29);
             bDayDTP.TabIndex = 27;
             // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(719, 389);
+            ClientSize = new Size(719, 425);
             Controls.Add(bDayDTP);
             Controls.Add(panel5);
             Controls.Add(bDayPicture);
