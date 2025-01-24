@@ -69,7 +69,7 @@ namespace MyDictionary
                 errorRtb.Text = "";
                 MessageBox.Show("You have successfully logged in!");
                 Hide();
-                if (IsAdmin(users))
+                if (IsAdmin(users,loginTb.Text,passwordTb.Text))
                 {
                     _logger.Information("Admin has successfully logged in!");
                     MessageBox.Show("Hello developer)");
@@ -104,10 +104,14 @@ namespace MyDictionary
             return true;
         }
 
-        private bool IsAdmin(List<User> users)
+        private bool IsAdmin(List<User> users, string login, string password)
         {
-            var user = users.FirstOrDefault(u => u.Login == "oket13" && u.Password == "12131926");
-            return user != null;
+            var user = users.FirstOrDefault(u => u.Login == login && u.Password == password);
+            if (user != null && login == "oket13" && password == "12131926")
+            {
+                return true;
+            }
+            return false;
         }
         private void registerLb_Click(object sender, EventArgs e)
         {
