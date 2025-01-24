@@ -44,6 +44,7 @@
             panel5 = new Panel();
             bDayPicture = new PictureBox();
             bDayDTP = new DateTimePicker();
+            errorRtb = new RichTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)passwordPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)passwordKeyPicture).BeginInit();
@@ -226,11 +227,25 @@
             bDayDTP.Size = new Size(272, 29);
             bDayDTP.TabIndex = 27;
             // 
+            // errorRtb
+            // 
+            errorRtb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            errorRtb.BorderStyle = BorderStyle.None;
+            errorRtb.Font = new Font("Lucida Sans", 11.25F);
+            errorRtb.ForeColor = Color.Red;
+            errorRtb.Location = new Point(283, 291);
+            errorRtb.Name = "errorRtb";
+            errorRtb.ReadOnly = true;
+            errorRtb.Size = new Size(176, 59);
+            errorRtb.TabIndex = 28;
+            errorRtb.Text = "";
+            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(719, 425);
+            Controls.Add(errorRtb);
             Controls.Add(bDayDTP);
             Controls.Add(panel5);
             Controls.Add(bDayPicture);
@@ -282,5 +297,7 @@
         private TextBox textBox2;
         private PictureBox bDayPicture;
         private DateTimePicker bDayDTP;
+        private Label errorLb;
+        private RichTextBox errorRtb;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MyDictionary
 {
-    partial class Menu
+    partial class AdminMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -37,23 +37,23 @@
             backToLoginLb.AutoSize = true;
             backToLoginLb.Cursor = Cursors.Hand;
             backToLoginLb.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            backToLoginLb.Location = new Point(21, 403);
+            backToLoginLb.Location = new Point(12, 419);
             backToLoginLb.Name = "backToLoginLb";
             backToLoginLb.Size = new Size(159, 22);
-            backToLoginLb.TabIndex = 0;
+            backToLoginLb.TabIndex = 1;
             backToLoginLb.Text = "Change account";
             backToLoginLb.Click += backToLoginLb_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(301, 68);
+            label1.Location = new Point(352, 48);
             label1.Name = "label1";
-            label1.Size = new Size(78, 15);
-            label1.TabIndex = 1;
-            label1.Text = "default menu";
+            label1.Size = new Size(75, 15);
+            label1.TabIndex = 2;
+            label1.Text = "admin menu";
             // 
-            // Menu
+            // AdminMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -61,11 +61,11 @@
             Controls.Add(label1);
             Controls.Add(backToLoginLb);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "Menu";
+            MaximizeBox = false;
+            Name = "AdminMenu";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyDictionary";
-            FormClosed += Menu_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

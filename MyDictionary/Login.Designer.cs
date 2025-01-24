@@ -40,6 +40,7 @@
             passwordPicture = new PictureBox();
             forgotLb = new Label();
             registerLb = new Label();
+            errorRtb = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)loginPicrture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)passwordKeyPicture).BeginInit();
             panel1.SuspendLayout();
@@ -57,7 +58,6 @@
             loginLb.Size = new Size(124, 42);
             loginLb.TabIndex = 10;
             loginLb.Text = "Login";
-            loginLb.Click += loginLb_Click;
             // 
             // loginPicrture
             // 
@@ -99,7 +99,7 @@
             loginBtn.FlatStyle = FlatStyle.Flat;
             loginBtn.Font = new Font("Lucida Sans", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             loginBtn.ForeColor = Color.Black;
-            loginBtn.Location = new Point(152, 313);
+            loginBtn.Location = new Point(151, 351);
             loginBtn.Name = "loginBtn";
             loginBtn.Size = new Size(130, 37);
             loginBtn.TabIndex = 3;
@@ -174,18 +174,32 @@
             registerLb.AutoSize = true;
             registerLb.Cursor = Cursors.Hand;
             registerLb.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            registerLb.Location = new Point(178, 353);
+            registerLb.Location = new Point(178, 391);
             registerLb.Name = "registerLb";
             registerLb.Size = new Size(82, 17);
             registerLb.TabIndex = 10;
             registerLb.Text = "or register";
             registerLb.Click += registerLb_Click;
             // 
+            // errorRtb
+            // 
+            errorRtb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            errorRtb.BorderStyle = BorderStyle.None;
+            errorRtb.Font = new Font("Lucida Sans", 11.25F);
+            errorRtb.ForeColor = Color.Red;
+            errorRtb.Location = new Point(128, 305);
+            errorRtb.Name = "errorRtb";
+            errorRtb.ReadOnly = true;
+            errorRtb.Size = new Size(176, 40);
+            errorRtb.TabIndex = 29;
+            errorRtb.Text = "";
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(431, 503);
+            Controls.Add(errorRtb);
             Controls.Add(registerLb);
             Controls.Add(forgotLb);
             Controls.Add(passwordPicture);
@@ -203,7 +217,6 @@
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MyDictionary";
-            Load += Login_Load;
             ((System.ComponentModel.ISupportInitialize)loginPicrture).EndInit();
             ((System.ComponentModel.ISupportInitialize)passwordKeyPicture).EndInit();
             panel1.ResumeLayout(false);
@@ -227,5 +240,6 @@
         private PictureBox passwordPicture;
         private Label forgotLb;
         private Label registerLb;
+        private RichTextBox errorRtb;
     }
 }
