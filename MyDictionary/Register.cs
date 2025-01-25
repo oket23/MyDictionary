@@ -1,8 +1,5 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using Microsoft.VisualBasic.Logging;
-using Serilog;
+﻿using Serilog;
 using Serilog.Core;
-using System.Text.Json;
 
 namespace MyDictionary
 {

@@ -2,10 +2,10 @@
 {
     public partial class Menu : Form
     {
-        private Login _login;
-        public Menu(Login login)
+        private bool _isAdmin = false;
+        public Menu(bool admin)
         {
-            _login = login;
+            _isAdmin = admin;
             InitializeComponent();
         }
 
@@ -13,11 +13,31 @@
         {
             Application.Exit();
         }
-
-        private void backToLoginLb_Click(object sender, EventArgs e)
+        private void exitLb_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Bye-Bye");
+            Application.Exit();
+        }
+        private void settingsLb_Click(object sender, EventArgs e)
+        {
+            var settings = new Settings(_isAdmin);
             Hide();
-            _login.Show();
+            settings.Show();
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+            if (!_isAdmin)
+            {
+                adminToolsLb.Visible = false;
+            }
+        }
+
+        private void adminToolsLb_Click(object sender, EventArgs e)
+        {
+            var adminTools = new AdminTools();
+            Hide();
+            adminTools.Show();
         }
     }
 }

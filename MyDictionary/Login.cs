@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic.Logging;
 using Serilog;
 using Serilog.Core;
 
@@ -45,46 +44,41 @@ namespace MyDictionary
             changeForm(forgotPassword);
 
         }
-        private void changeForm(Form form)
+        public void changeForm(Form form)
         {
             Hide();
             form.Show();
         }
-
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            bool isAdmin = false;
-            var menu = new Menu(this);
-            var adminMenu = new AdminMenu(this);
-
             errorRtb.SelectAll();
             errorRtb.SelectionAlignment = HorizontalAlignment.Center;
 
             var users = new List<User>();
             users = users.GetUsersFromFile(_path).ToList();
+            
 
-
-            if(IsValidLoginAndPassword(loginTb.Text,passwordTb.Text,users,isAdmin))
+            if (IsValidLoginAndPassword(loginTb.Text,passwordTb.Text,users))
             {
+                var menu = new Menu(IsAdmin(users, loginTb.Text, passwordTb.Text));
                 errorRtb.Text = "";
                 MessageBox.Show("You have successfully logged in!");
                 Hide();
+
                 if (IsAdmin(users,loginTb.Text,passwordTb.Text))
                 {
                     _logger.Information("Admin has successfully logged in!");
                     MessageBox.Show("Hello developer)");
-                    changeForm(adminMenu);
                 }
                 else
                 {
-                    _logger.Information("User has successfully logged in!");
-                    changeForm(menu);
+                    _logger.Information("User has successfully logged in!");  
                 }
-            }
 
-            
+                changeForm(menu);
+            }
         }
-        private bool IsValidLoginAndPassword(string login, string password, List<User> users,bool isAdmin)
+        private bool IsValidLoginAndPassword(string login, string password, List<User> users)
         {
             var user = users.FirstOrDefault(u => u.Login == login);
             if (user == null)
@@ -93,7 +87,6 @@ namespace MyDictionary
                 _logger.Error("User enters incorrect login.");
                 return false;
             }
-
             if (user.Password != password)
             {
                 errorRtb.Text = "Incorrect password.";
@@ -103,7 +96,6 @@ namespace MyDictionary
 
             return true;
         }
-
         private bool IsAdmin(List<User> users, string login, string password)
         {
             var user = users.FirstOrDefault(u => u.Login == login && u.Password == password);
