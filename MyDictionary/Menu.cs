@@ -1,5 +1,7 @@
-﻿using Serilog;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using Serilog;
 using Serilog.Core;
+using System.DirectoryServices;
 using System.Text.Json;
 
 namespace MyDictionary
@@ -11,6 +13,7 @@ namespace MyDictionary
         private string _path;
         private Dictionary _dictionary;
         private readonly Logger _logger;
+        private string _dictionaryTypePath;
         public Menu(bool admin, User user)
         {
             _logger = new LoggerConfiguration()
@@ -20,6 +23,7 @@ namespace MyDictionary
             _isAdmin = admin;
             _user = user;
             _dictionary = new Dictionary();
+            _dictionaryTypePath = "dictionaryType.txt";
             InitializeComponent();
         }
 
@@ -44,6 +48,13 @@ namespace MyDictionary
             {
                 adminToolsLb.Visible = false;
             }
+
+            var types = GetTypesFromFile(_dictionaryTypePath);
+            dictionaryTypeB.Items.Clear();
+            foreach (var item in types)
+            {
+                dictionaryTypeB.Items.Add(item);
+            }
         }
         private void adminToolsLb_Click(object sender, EventArgs e)
         {
@@ -55,17 +66,18 @@ namespace MyDictionary
         {
             try
             {
-                _dictionary.worlds = _dictionary.GetWorldsFromFile(_path);
                 mainRtb.Clear();
                 mainRtb.Text = string.Join("\n", _dictionary.worlds.Select(w => $"{w.Word} - {string.Join(", ", w.Translations)}"));
-
+                if (string.IsNullOrEmpty(mainRtb.Text))
+                {
+                    mainRtb.Text = "Please select a dictionary.";
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Please select a dictionary.");
                 _logger.Error($"{ex} {ex.Message}");
             }
-
         }
         private void allWordBtn_Click(object sender, EventArgs e)
         {
@@ -75,17 +87,17 @@ namespace MyDictionary
         {
             try
             {
-                _dictionary.worlds = _dictionary.GetWorldsFromFile(_path);
                 mainRtb.Clear();
-                var word = userWordTb.Text;
-                var foundWords = _dictionary.worlds.Where(w => w.Word.Equals(word, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
+                var word = userWordTb.Text.Trim();
 
                 if (string.IsNullOrEmpty(word))
                 {
                     mainRtb.Text = "Please enter a word to search.";
                     return;
                 }
+
+                var foundWords = _dictionary.worlds.Where(w => w.Word.Equals(word, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
 
                 if (foundWords.Any())
                 {
@@ -101,22 +113,20 @@ namespace MyDictionary
                 MessageBox.Show("Please select a dictionary.");
                 _logger.Error($"{ex} {ex.Message}");
             }
-
         }
         private void seachBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                _dictionary.worlds = _dictionary.GetWorldsFromFile(_path);
                 mainRtb.Clear();
                 var word = userWordTb.Text.Trim();
-                var searchResults = _dictionary.SearchByWordPart(word);
-
                 if (string.IsNullOrEmpty(word))
                 {
                     mainRtb.Text = "Please enter a word to search.";
                     return;
                 }
+
+                var searchResults = _dictionary.SearchByWordPart(word);
 
                 if (searchResults.Any())
                 {
@@ -132,19 +142,104 @@ namespace MyDictionary
                 MessageBox.Show("Please select a dictionary.");
                 _logger.Error($"{ex} {ex.Message}");
             }
-
         }
-
         private void dictionaryTypeB_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedItem = dictionaryTypeB.SelectedItem.ToString();
+            _dictionary.Type = selectedItem;
             _path = $"{selectedItem}.json";
+            _dictionary.worlds = _dictionary.GetWorldsFromFile(_path);
         }
-
         private void exportBtn_Click(object sender, EventArgs e)
         {
-            //експортувати словник у файл з вибором куди
-            //зробити ще одну кнопку для екпорту імено слова і перекладу слова в файл з вибором куди
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+
+            if (!_dictionary.worlds.Any())
+            {
+                MessageBox.Show("Please chooise dictionary!");
+                return;
+            }
+
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    var userPath = Path.Combine(folderBrowserDialog.SelectedPath, "translation.txt");
+                    using (var fs = new FileStream(userPath, FileMode.Create, FileAccess.Write))
+                    {
+                        using (var sw = new StreamWriter(fs))
+                        {
+                            sw.WriteLine(string.Join("\n", _dictionary.worlds.Select(w => $"{w.Word} - {string.Join(", ", w.Translations)}")));
+                        }
+                    }
+                    MessageBox.Show("Dictionary copied successfully");
+                    _logger.Information("Dictionary copied successfully");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error");
+                    _logger.Error($"{ex} {ex.Message}");
+                }
+            }
         }
+        private void exportSimpleBtn_Click(object sender, EventArgs e)
+        {
+            var word = userWordTb.Text.Trim();
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (string.IsNullOrEmpty(word))
+            {
+                MessageBox.Show("Enter valid word");
+                return;
+            }
+            var wordToExtport = _dictionary.worlds.Where(u => u.Word.Equals(word, StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+            if (wordToExtport.Any())
+            {
+                if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var userPath = Path.Combine(folderBrowserDialog.SelectedPath, "translation.txt");
+                        using (var fs = new FileStream(userPath, FileMode.Create, FileAccess.Write))
+                        {
+                            using (var sw = new StreamWriter(fs))
+                            {
+                                sw.WriteLine(string.Join("\n", wordToExtport.Select(w => $"{w.Word} - {string.Join(", ", w.Translations)}")));
+                            }
+                        }
+                        MessageBox.Show("Word copied successfully");
+                        _logger.Information("Word copied successfully");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error");
+                        _logger.Error($"{ex} {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No such word found");
+                _logger.Information("User entered the correct word");
+            }
+        }
+
+        private List<string> GetTypesFromFile(string path)
+        {
+            List<string> types = new List<string>();
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                using (var sr = new StreamReader(fs))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        types.Add(sr.ReadLine());
+                    }
+                }
+            }
+            return types;
+        }
+
     }
 }

@@ -43,6 +43,7 @@
             dictionaryTypeB = new ComboBox();
             userWordTb = new TextBox();
             panel2 = new Panel();
+            exportSimpleBtn = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -142,7 +143,7 @@
             // 
             allWordBtn.FlatStyle = FlatStyle.Flat;
             allWordBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            allWordBtn.Location = new Point(631, 262);
+            allWordBtn.Location = new Point(631, 200);
             allWordBtn.Name = "allWordBtn";
             allWordBtn.Size = new Size(126, 42);
             allWordBtn.TabIndex = 3;
@@ -154,7 +155,7 @@
             // 
             showAllInfoBtn.FlatStyle = FlatStyle.Flat;
             showAllInfoBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            showAllInfoBtn.Location = new Point(631, 321);
+            showAllInfoBtn.Location = new Point(631, 259);
             showAllInfoBtn.Name = "showAllInfoBtn";
             showAllInfoBtn.Size = new Size(126, 45);
             showAllInfoBtn.TabIndex = 3;
@@ -166,7 +167,7 @@
             // 
             seachBtn.FlatStyle = FlatStyle.Flat;
             seachBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            seachBtn.Location = new Point(631, 384);
+            seachBtn.Location = new Point(631, 322);
             seachBtn.Name = "seachBtn";
             seachBtn.Size = new Size(126, 45);
             seachBtn.TabIndex = 3;
@@ -215,7 +216,7 @@
             userWordTb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             userWordTb.BorderStyle = BorderStyle.None;
             userWordTb.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            userWordTb.Location = new Point(631, 225);
+            userWordTb.Location = new Point(631, 163);
             userWordTb.MaxLength = 20;
             userWordTb.Name = "userWordTb";
             userWordTb.PlaceholderText = "Enter word";
@@ -225,10 +226,22 @@
             // panel2
             // 
             panel2.BackColor = Color.Black;
-            panel2.Location = new Point(631, 243);
+            panel2.Location = new Point(631, 181);
             panel2.Name = "panel2";
             panel2.Size = new Size(126, 3);
             panel2.TabIndex = 11;
+            // 
+            // exportSimpleBtn
+            // 
+            exportSimpleBtn.FlatStyle = FlatStyle.Flat;
+            exportSimpleBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            exportSimpleBtn.Location = new Point(631, 385);
+            exportSimpleBtn.Name = "exportSimpleBtn";
+            exportSimpleBtn.Size = new Size(126, 45);
+            exportSimpleBtn.TabIndex = 3;
+            exportSimpleBtn.Text = "Export word ";
+            exportSimpleBtn.UseVisualStyleBackColor = true;
+            exportSimpleBtn.Click += exportSimpleBtn_Click;
             // 
             // Menu
             // 
@@ -239,6 +252,7 @@
             Controls.Add(panel2);
             Controls.Add(dictionaryTypeB);
             Controls.Add(mainRtb);
+            Controls.Add(exportSimpleBtn);
             Controls.Add(seachBtn);
             Controls.Add(showAllInfoBtn);
             Controls.Add(allWordBtn);
@@ -275,5 +289,6 @@
         private ComboBox dictionaryTypeB;
         private TextBox userWordTb;
         private Panel panel2;
+        private Button exportSimpleBtn;
     }
 }
