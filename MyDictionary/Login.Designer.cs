@@ -86,11 +86,10 @@
             passwordTb.Font = new Font("Lucida Sans", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
             passwordTb.Location = new Point(85, 251);
             passwordTb.MaxLength = 20;
-            passwordTb.Multiline = true;
             passwordTb.Name = "passwordTb";
             passwordTb.PasswordChar = '*';
             passwordTb.PlaceholderText = "Enter password";
-            passwordTb.Size = new Size(275, 38);
+            passwordTb.Size = new Size(275, 24);
             passwordTb.TabIndex = 2;
             // 
             // loginBtn
@@ -139,10 +138,9 @@
             loginTb.Font = new Font("Lucida Sans", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
             loginTb.Location = new Point(85, 162);
             loginTb.MaxLength = 20;
-            loginTb.Multiline = true;
             loginTb.Name = "loginTb";
             loginTb.PlaceholderText = "Enter login";
-            loginTb.Size = new Size(275, 35);
+            loginTb.Size = new Size(275, 24);
             loginTb.TabIndex = 2;
             // 
             // passwordPicture

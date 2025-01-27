@@ -11,7 +11,7 @@ namespace MyDictionary
 {
     public static class ExtensionClass
     {
-        public static IEnumerable<T> GetUsersFromFile<T>(this IEnumerable<T> collection, string path)
+        public static List<T> GetUsersFromFile<T>(this IEnumerable<T> collection, string path)
         {
             List<T> users = new List<T>();
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -31,7 +31,7 @@ namespace MyDictionary
 
         public static void SetUsersToFile(this User user,string path)
         {
-            using (var fs = new FileStream("Users.json", FileMode.Append, FileAccess.Write))
+            using (var fs = new FileStream(path, FileMode.Append, FileAccess.Write))
             {
                 using (var sw = new StreamWriter(fs))
                 {
@@ -41,5 +41,24 @@ namespace MyDictionary
                 }
             }
         }
+
+        public static void DeleteUser(this User user, string path)
+        {
+            List<User> usersList = new List<User>().GetUsersFromFile(path);
+            var newUsers = usersList.Where(u => u.Login != user.Login).ToList();
+
+            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                using (var sw = new StreamWriter(fs))
+                {
+                    foreach (var item in newUsers)
+                    {
+                        var json = JsonSerializer.Serialize(item);
+                        sw.WriteLine(json);
+                    }
+                }
+            }
+        }
+
     }
 }

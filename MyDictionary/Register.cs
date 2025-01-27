@@ -57,9 +57,19 @@ namespace MyDictionary
             var users = new List<User>();
             users = users.GetUsersFromFile(_path).ToList();
 
-            user.Login = loginTb.Text;
-            user.Password = passwordTb.Text;
-            user.BDate = bDayDTP.Value;
+            try
+            {
+                user.Login = loginTb.Text;
+                user.Password = passwordTb.Text;
+                user.BDate = DateTime.Parse(BdayTb.Text);
+            }
+            catch (Exception ex) 
+            {
+                _logger.Error($"{ex} {ex.Message}");
+            }
+
+
+
 
             if (IsvalidLogin(loginTb.Text, users) && IsValidPassword(passwordTb.Text, passwordAgainTb.Text) && IsValidBDate(user.BDate))
             {
@@ -117,6 +127,12 @@ namespace MyDictionary
             {
                 errorRtb.Text = "You must be at least 3 years old to register.";
                 _logger.Error("User is under 3.");
+                return false;
+            }
+            if(age > 100)
+            {
+                errorRtb.Text = "Enter valid date";
+                _logger.Error("User enter incorrect date");
                 return false;
             }
 

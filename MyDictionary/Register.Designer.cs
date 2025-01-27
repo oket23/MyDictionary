@@ -43,8 +43,8 @@
             passwordAgainTb = new TextBox();
             panel5 = new Panel();
             bDayPicture = new PictureBox();
-            bDayDTP = new DateTimePicker();
             errorRtb = new RichTextBox();
+            BdayTb = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)passwordPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)passwordKeyPicture).BeginInit();
@@ -135,10 +135,9 @@
             loginTb.Font = new Font("Lucida Sans", 15F, FontStyle.Regular, GraphicsUnit.Point, 0);
             loginTb.Location = new Point(54, 175);
             loginTb.MaxLength = 20;
-            loginTb.Multiline = true;
             loginTb.Name = "loginTb";
             loginTb.PlaceholderText = "Enter login";
-            loginTb.Size = new Size(275, 29);
+            loginTb.Size = new Size(275, 24);
             loginTb.TabIndex = 16;
             // 
             // passwordTb
@@ -148,11 +147,10 @@
             passwordTb.Font = new Font("Lucida Sans", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             passwordTb.Location = new Point(399, 178);
             passwordTb.MaxLength = 20;
-            passwordTb.Multiline = true;
             passwordTb.Name = "passwordTb";
             passwordTb.PasswordChar = '*';
             passwordTb.PlaceholderText = "Enter password";
-            passwordTb.Size = new Size(282, 26);
+            passwordTb.Size = new Size(282, 25);
             passwordTb.TabIndex = 17;
             // 
             // passwordKeyPicture
@@ -190,11 +188,10 @@
             passwordAgainTb.Font = new Font("Lucida Sans", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             passwordAgainTb.Location = new Point(399, 242);
             passwordAgainTb.MaxLength = 20;
-            passwordAgainTb.Multiline = true;
             passwordAgainTb.Name = "passwordAgainTb";
             passwordAgainTb.PasswordChar = '*';
             passwordAgainTb.PlaceholderText = "Enter password again";
-            passwordAgainTb.Size = new Size(282, 28);
+            passwordAgainTb.Size = new Size(282, 25);
             passwordAgainTb.TabIndex = 22;
             // 
             // panel5
@@ -215,18 +212,6 @@
             bDayPicture.TabIndex = 24;
             bDayPicture.TabStop = false;
             // 
-            // bDayDTP
-            // 
-            bDayDTP.Cursor = Cursors.Hand;
-            bDayDTP.Font = new Font("SimSun", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            bDayDTP.Format = DateTimePickerFormat.Custom;
-            bDayDTP.Location = new Point(57, 231);
-            bDayDTP.MaxDate = new DateTime(2030, 12, 31, 0, 0, 0, 0);
-            bDayDTP.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
-            bDayDTP.Name = "bDayDTP";
-            bDayDTP.Size = new Size(272, 29);
-            bDayDTP.TabIndex = 27;
-            // 
             // errorRtb
             // 
             errorRtb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
@@ -240,13 +225,25 @@
             errorRtb.TabIndex = 28;
             errorRtb.Text = "";
             // 
+            // BdayTb
+            // 
+            BdayTb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            BdayTb.BorderStyle = BorderStyle.None;
+            BdayTb.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            BdayTb.Location = new Point(54, 242);
+            BdayTb.MaxLength = 20;
+            BdayTb.Name = "BdayTb";
+            BdayTb.PlaceholderText = "Enter your date of birth";
+            BdayTb.Size = new Size(250, 23);
+            BdayTb.TabIndex = 32;
+            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(719, 425);
+            Controls.Add(BdayTb);
             Controls.Add(errorRtb);
-            Controls.Add(bDayDTP);
             Controls.Add(panel5);
             Controls.Add(bDayPicture);
             Controls.Add(panel4);
@@ -296,8 +293,8 @@
         private Panel panel5;
         private TextBox textBox2;
         private PictureBox bDayPicture;
-        private DateTimePicker bDayDTP;
         private Label errorLb;
         private RichTextBox errorRtb;
+        private TextBox BdayTb;
     }
 }

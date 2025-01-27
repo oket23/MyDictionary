@@ -4,8 +4,10 @@ namespace MyDictionary
 {
     public partial class AdminTools : Form
     {
-        public AdminTools()
+        private User _user;
+        public AdminTools(User user)
         {
+            _user = user;
             InitializeComponent();
         }
 
@@ -16,14 +18,14 @@ namespace MyDictionary
 
         private void viewDictionariesLb_Click(object sender, EventArgs e)
         {
-            var menu = new Menu(true);
+            var menu = new Menu(true,_user);
             Hide();
             menu.Show();
         }
 
         private void settingsLb_Click(object sender, EventArgs e)
         {
-            var settings = new Settings(true);
+            var settings = new Settings(true, _user);
             Hide();
             settings.Show();
         }

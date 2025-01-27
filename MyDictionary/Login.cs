@@ -56,25 +56,24 @@ namespace MyDictionary
 
             var users = new List<User>();
             users = users.GetUsersFromFile(_path).ToList();
-            
 
-            if (IsValidLoginAndPassword(loginTb.Text,passwordTb.Text,users))
+
+            if (IsValidLoginAndPassword(loginTb.Text, passwordTb.Text, users))
             {
-                var menu = new Menu(IsAdmin(users, loginTb.Text, passwordTb.Text));
                 errorRtb.Text = "";
                 MessageBox.Show("You have successfully logged in!");
                 Hide();
 
-                if (IsAdmin(users,loginTb.Text,passwordTb.Text))
+                if (IsAdmin(users, loginTb.Text))
                 {
                     _logger.Information("Admin has successfully logged in!");
                     MessageBox.Show("Hello developer)");
                 }
                 else
                 {
-                    _logger.Information("User has successfully logged in!");  
+                    _logger.Information("User has successfully logged in!");
                 }
-
+                var menu = new Menu(IsAdmin(users, loginTb.Text), users.First(u => u.Login == loginTb.Text));
                 changeForm(menu);
             }
         }
@@ -96,10 +95,10 @@ namespace MyDictionary
 
             return true;
         }
-        private bool IsAdmin(List<User> users, string login, string password)
+        private bool IsAdmin(List<User> users, string login)
         {
-            var user = users.FirstOrDefault(u => u.Login == login && u.Password == password);
-            if (user != null && login == "oket13" && password == "12131926")
+            var user = users.FirstOrDefault(u => u.Login == login);
+            if (user != null && login == "oket13")
             {
                 return true;
             }
@@ -110,5 +109,6 @@ namespace MyDictionary
             Register register = new Register(this);
             changeForm(register);
         }
+
     }
 }
