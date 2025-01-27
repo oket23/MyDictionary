@@ -50,8 +50,6 @@ namespace MyDictionary
             }
             loginLb.Text = $"Your login: {_user.Login}";
             bDayLb.Text = $"Your date of birth: {_user.BDate.ToShortDateString()}";
-
-
         }
 
         private void signOutLb_Click(object sender, EventArgs e)

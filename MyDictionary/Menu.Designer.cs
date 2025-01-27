@@ -34,6 +34,15 @@
             settingsLb = new Label();
             exitLb = new Label();
             viewDictionariesLbH = new Label();
+            exportBtn = new Button();
+            allWordBtn = new Button();
+            showAllInfoBtn = new Button();
+            seachBtn = new Button();
+            mainRtb = new RichTextBox();
+            chooseDictionaryLb = new Label();
+            dictionaryTypeB = new ComboBox();
+            userWordTb = new TextBox();
+            panel2 = new Panel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -117,11 +126,124 @@
             viewDictionariesLbH.TabIndex = 1;
             viewDictionariesLbH.Text = "Dictionaries";
             // 
+            // exportBtn
+            // 
+            exportBtn.FlatStyle = FlatStyle.Flat;
+            exportBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            exportBtn.Location = new Point(631, 77);
+            exportBtn.Name = "exportBtn";
+            exportBtn.Size = new Size(126, 32);
+            exportBtn.TabIndex = 3;
+            exportBtn.Text = "Export dictionary";
+            exportBtn.UseVisualStyleBackColor = true;
+            exportBtn.Click += exportBtn_Click;
+            // 
+            // allWordBtn
+            // 
+            allWordBtn.FlatStyle = FlatStyle.Flat;
+            allWordBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            allWordBtn.Location = new Point(631, 262);
+            allWordBtn.Name = "allWordBtn";
+            allWordBtn.Size = new Size(126, 42);
+            allWordBtn.TabIndex = 3;
+            allWordBtn.Text = "Show all words in dictionary";
+            allWordBtn.UseVisualStyleBackColor = true;
+            allWordBtn.Click += allWordBtn_Click;
+            // 
+            // showAllInfoBtn
+            // 
+            showAllInfoBtn.FlatStyle = FlatStyle.Flat;
+            showAllInfoBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            showAllInfoBtn.Location = new Point(631, 321);
+            showAllInfoBtn.Name = "showAllInfoBtn";
+            showAllInfoBtn.Size = new Size(126, 45);
+            showAllInfoBtn.TabIndex = 3;
+            showAllInfoBtn.Text = "Show all info about word ";
+            showAllInfoBtn.UseVisualStyleBackColor = true;
+            showAllInfoBtn.Click += showAllInfoBtn_Click;
+            // 
+            // seachBtn
+            // 
+            seachBtn.FlatStyle = FlatStyle.Flat;
+            seachBtn.Font = new Font("Lucida Sans", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            seachBtn.Location = new Point(631, 384);
+            seachBtn.Name = "seachBtn";
+            seachBtn.Size = new Size(126, 45);
+            seachBtn.TabIndex = 3;
+            seachBtn.Text = "Search word in dictionary";
+            seachBtn.UseVisualStyleBackColor = true;
+            seachBtn.Click += seachBtn_Click;
+            // 
+            // mainRtb
+            // 
+            mainRtb.Font = new Font("Microsoft JhengHei", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            mainRtb.Location = new Point(240, 153);
+            mainRtb.Name = "mainRtb";
+            mainRtb.ReadOnly = true;
+            mainRtb.Size = new Size(368, 277);
+            mainRtb.TabIndex = 4;
+            mainRtb.Text = "";
+            // 
+            // chooseDictionaryLb
+            // 
+            chooseDictionaryLb.AutoSize = true;
+            chooseDictionaryLb.BackColor = Color.White;
+            chooseDictionaryLb.Cursor = Cursors.Hand;
+            chooseDictionaryLb.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chooseDictionaryLb.ForeColor = Color.Black;
+            chooseDictionaryLb.Location = new Point(240, 85);
+            chooseDictionaryLb.Name = "chooseDictionaryLb";
+            chooseDictionaryLb.Size = new Size(202, 22);
+            chooseDictionaryLb.TabIndex = 1;
+            chooseDictionaryLb.Text = "Choose a dictionary:";
+            // 
+            // dictionaryTypeB
+            // 
+            dictionaryTypeB.Cursor = Cursors.Hand;
+            dictionaryTypeB.Font = new Font("Lucida Sans", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dictionaryTypeB.FormattingEnabled = true;
+            dictionaryTypeB.Items.AddRange(new object[] { "ukr-eng", "eng-ukr" });
+            dictionaryTypeB.Location = new Point(448, 83);
+            dictionaryTypeB.Name = "dictionaryTypeB";
+            dictionaryTypeB.Size = new Size(160, 26);
+            dictionaryTypeB.TabIndex = 5;
+            dictionaryTypeB.Text = "Enter dictionary";
+            dictionaryTypeB.SelectedIndexChanged += dictionaryTypeB_SelectedIndexChanged;
+            // 
+            // userWordTb
+            // 
+            userWordTb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            userWordTb.BorderStyle = BorderStyle.None;
+            userWordTb.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            userWordTb.Location = new Point(631, 225);
+            userWordTb.MaxLength = 20;
+            userWordTb.Name = "userWordTb";
+            userWordTb.PlaceholderText = "Enter word";
+            userWordTb.Size = new Size(126, 18);
+            userWordTb.TabIndex = 10;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Black;
+            panel2.Location = new Point(631, 243);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(126, 3);
+            panel2.TabIndex = 11;
+            // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(userWordTb);
+            Controls.Add(panel2);
+            Controls.Add(dictionaryTypeB);
+            Controls.Add(mainRtb);
+            Controls.Add(seachBtn);
+            Controls.Add(showAllInfoBtn);
+            Controls.Add(allWordBtn);
+            Controls.Add(exportBtn);
+            Controls.Add(chooseDictionaryLb);
             Controls.Add(viewDictionariesLbH);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -144,5 +266,14 @@
         private Label viewDictionariesLb;
         private Label viewDictionariesLbH;
         private Label adminToolsLb;
+        private Button exportBtn;
+        private Button allWordBtn;
+        private Button showAllInfoBtn;
+        private Button seachBtn;
+        private RichTextBox mainRtb;
+        private Label chooseDictionaryLb;
+        private ComboBox dictionaryTypeB;
+        private TextBox userWordTb;
+        private Panel panel2;
     }
 }

@@ -68,9 +68,6 @@ namespace MyDictionary
                 _logger.Error($"{ex} {ex.Message}");
             }
 
-
-
-
             if (IsvalidLogin(loginTb.Text, users) && IsValidPassword(passwordTb.Text, passwordAgainTb.Text) && IsValidBDate(user.BDate))
             {
                 errorRtb.Text = "";
