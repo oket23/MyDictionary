@@ -92,7 +92,6 @@ namespace MyDictionary
                 _logger.Error("User enters incorrect password.");
                 return false;
             }
-
             return true;
         }
         private bool IsAdmin(List<User> users, string login)
