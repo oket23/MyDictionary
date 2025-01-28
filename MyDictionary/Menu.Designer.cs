@@ -39,11 +39,11 @@
             showAllInfoBtn = new Button();
             seachBtn = new Button();
             mainRtb = new RichTextBox();
-            chooseDictionaryLb = new Label();
             dictionaryTypeB = new ComboBox();
             userWordTb = new TextBox();
             panel2 = new Panel();
             exportSimpleBtn = new Button();
+            chooseDictionaryLb = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -185,19 +185,6 @@
             mainRtb.TabIndex = 4;
             mainRtb.Text = "";
             // 
-            // chooseDictionaryLb
-            // 
-            chooseDictionaryLb.AutoSize = true;
-            chooseDictionaryLb.BackColor = Color.White;
-            chooseDictionaryLb.Cursor = Cursors.Hand;
-            chooseDictionaryLb.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chooseDictionaryLb.ForeColor = Color.Black;
-            chooseDictionaryLb.Location = new Point(240, 85);
-            chooseDictionaryLb.Name = "chooseDictionaryLb";
-            chooseDictionaryLb.Size = new Size(202, 22);
-            chooseDictionaryLb.TabIndex = 1;
-            chooseDictionaryLb.Text = "Choose a dictionary:";
-            // 
             // dictionaryTypeB
             // 
             dictionaryTypeB.Cursor = Cursors.Hand;
@@ -243,6 +230,19 @@
             exportSimpleBtn.UseVisualStyleBackColor = true;
             exportSimpleBtn.Click += exportSimpleBtn_Click;
             // 
+            // chooseDictionaryLb
+            // 
+            chooseDictionaryLb.AutoSize = true;
+            chooseDictionaryLb.BackColor = Color.White;
+            chooseDictionaryLb.Cursor = Cursors.Hand;
+            chooseDictionaryLb.Font = new Font("Lucida Sans", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            chooseDictionaryLb.ForeColor = Color.Black;
+            chooseDictionaryLb.Location = new Point(240, 85);
+            chooseDictionaryLb.Name = "chooseDictionaryLb";
+            chooseDictionaryLb.Size = new Size(202, 22);
+            chooseDictionaryLb.TabIndex = 1;
+            chooseDictionaryLb.Text = "Choose a dictionary:";
+            // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -261,6 +261,7 @@
             Controls.Add(viewDictionariesLbH);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Menu";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -285,10 +286,10 @@
         private Button showAllInfoBtn;
         private Button seachBtn;
         private RichTextBox mainRtb;
-        private Label chooseDictionaryLb;
         private ComboBox dictionaryTypeB;
         private TextBox userWordTb;
         private Panel panel2;
         private Button exportSimpleBtn;
+        private Label chooseDictionaryLb;
     }
 }
