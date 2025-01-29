@@ -43,7 +43,6 @@
             passwordAgainTb = new TextBox();
             panel5 = new Panel();
             bDayPicture = new PictureBox();
-            errorRtb = new RichTextBox();
             BdayTb = new TextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)passwordPicture).BeginInit();
@@ -57,7 +56,7 @@
             loginLb.AutoSize = true;
             loginLb.Cursor = Cursors.Hand;
             loginLb.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            loginLb.Location = new Point(334, 393);
+            loginLb.Location = new Point(334, 356);
             loginLb.Name = "loginLb";
             loginLb.Size = new Size(66, 17);
             loginLb.TabIndex = 12;
@@ -70,7 +69,7 @@
             registerBtn.FlatStyle = FlatStyle.Flat;
             registerBtn.Font = new Font("Lucida Sans", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             registerBtn.ForeColor = Color.Black;
-            registerBtn.Location = new Point(296, 356);
+            registerBtn.Location = new Point(296, 319);
             registerBtn.Name = "registerBtn";
             registerBtn.Size = new Size(144, 34);
             registerBtn.TabIndex = 11;
@@ -212,19 +211,6 @@
             bDayPicture.TabIndex = 24;
             bDayPicture.TabStop = false;
             // 
-            // errorRtb
-            // 
-            errorRtb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            errorRtb.BorderStyle = BorderStyle.None;
-            errorRtb.Font = new Font("Lucida Sans", 11.25F);
-            errorRtb.ForeColor = Color.Red;
-            errorRtb.Location = new Point(283, 291);
-            errorRtb.Name = "errorRtb";
-            errorRtb.ReadOnly = true;
-            errorRtb.Size = new Size(176, 59);
-            errorRtb.TabIndex = 28;
-            errorRtb.Text = "";
-            // 
             // BdayTb
             // 
             BdayTb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -243,7 +229,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(719, 425);
             Controls.Add(BdayTb);
-            Controls.Add(errorRtb);
             Controls.Add(panel5);
             Controls.Add(bDayPicture);
             Controls.Add(panel4);
@@ -294,7 +279,6 @@
         private TextBox textBox2;
         private PictureBox bDayPicture;
         private Label errorLb;
-        private RichTextBox errorRtb;
         private TextBox BdayTb;
     }
 }

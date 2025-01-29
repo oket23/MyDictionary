@@ -269,6 +269,7 @@
             changeTransBtn.TabIndex = 16;
             changeTransBtn.Text = "Change translation";
             changeTransBtn.UseVisualStyleBackColor = true;
+            changeTransBtn.Click += changeTransBtn_Click;
             // 
             // addDictionaryBtn
             // 
@@ -280,6 +281,7 @@
             addDictionaryBtn.TabIndex = 16;
             addDictionaryBtn.Text = "Add new dictionary";
             addDictionaryBtn.UseVisualStyleBackColor = true;
+            addDictionaryBtn.Click += addDictionaryBtn_Click;
             // 
             // addNewWord
             // 
@@ -291,6 +293,7 @@
             addNewWord.TabIndex = 16;
             addNewWord.Text = "Add new word";
             addNewWord.UseVisualStyleBackColor = true;
+            addNewWord.Click += addNewWord_Click;
             // 
             // panel4
             // 
