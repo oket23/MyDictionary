@@ -28,6 +28,7 @@ public class UserService
     }
     public bool IsValidLoginAndPassword(string login, string password, List<User> users)
     {
+        var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
         var user = users.FirstOrDefault(u => u.Login == login);
         if (user == null)
         {
@@ -35,7 +36,7 @@ public class UserService
             _logger.Error("User enters incorrect login.");
             return false;
         }
-        if (user.Password != password)
+        if (BCrypt.Net.BCrypt.Verify(user.Password, passwordHash))
         {
             MessageBox.Show("Incorrect password.");
             _logger.Error("User enters incorrect password.");
@@ -102,23 +103,14 @@ public class UserService
         _logger.Information("User's age is valid.");
         return true;
     }
-    public void DeleteUser(User user, string path)
+    public List<User> DeleteUser(User user, string path)
     {
         List<User> usersList = new List<User>();
         usersList = _dataStorage.Get(path);
         var newUsers = usersList.Where(u => u.Login != user.Login).ToList();
 
-        using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
-        {
-            using (var sw = new StreamWriter(fs))
-            {
-                foreach (var item in newUsers)
-                {
-                    var json = JsonSerializer.Serialize(item);
-                    sw.WriteLine(json);
-                }
-            }
-        }
+        return newUsers;
     }
+
 
 }

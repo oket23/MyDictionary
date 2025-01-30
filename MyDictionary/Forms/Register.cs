@@ -54,12 +54,11 @@ public partial class Register : Form
     {
         _userService.users = _dataStorage.Get(_path);
         var user = new User();
-        var passwordHash = passwordTb.Text.GetHashCode();
+        var passwordHash = BCrypt.Net.BCrypt.HashPassword(passwordTb.Text);
 
         try
         {
             user.Login = loginTb.Text;
-            user.Password = passwordTb.Text;
             user.BDate = DateTime.Parse(BdayTb.Text);
         }
         catch (Exception ex)
@@ -67,8 +66,9 @@ public partial class Register : Form
             _logger.Error($"{ex} {ex.Message}");
         }
 
-        if (_userService.IsvalidLogin(user.Login, _userService.users) && _userService.IsValidPassword(user.Password, passwordAgainTb.Text) && _userService.IsValidBDate(user.BDate))
+        if (_userService.IsvalidLogin(user.Login, _userService.users) && _userService.IsValidPassword(passwordTb.Text, passwordAgainTb.Text) && _userService.IsValidBDate(user.BDate))
         {
+            user.Password = passwordHash;
             _userService.users.Add(user);
             _dataStorage.Save(_userService.users, _path);
             MessageBox.Show("You successfully registered!");

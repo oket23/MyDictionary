@@ -64,6 +64,7 @@ public partial class Settings : Form
             var newBdate = DateTime.Parse(newBdayTb.Text);
             _user.BDate = newBdate;
             _userService.DeleteUser(_user,_path);
+            _userService.users.Add(_user);
             _dataStorage.Save(_userService.users, _path);
 
             bDayLb.Text = $"Your date of birth: {_user.BDate.ToShortDateString()}";
@@ -78,13 +79,15 @@ public partial class Settings : Form
     }
     private void changeBtn_Click(object sender, EventArgs e)
     {
-        var oldPassword = oldPasswordTb.Text;
-        var newPassword = newPasswordTb.Text;
+        var oldPassword = oldPasswordTb.Text.Trim();
+        var newPassword = newPasswordTb.Text.Trim();
 
-        if (oldPassword == _user.Password)
+        if (BCrypt.Net.BCrypt.Verify(oldPassword, _user.Password))
         {
-            _user.Password = newPassword;
-            _userService.DeleteUser(_user, _path);
+            _user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+            _userService.users = _userService.DeleteUser(_user, _path);
+            _userService.users.Add(_user);
             _dataStorage.Save(_userService.users, _path);
 
             MessageBox.Show("You have successfully changed the password");
