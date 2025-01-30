@@ -10,6 +10,7 @@ public partial class AdminTools : Form
     private readonly Logger _logger;
     private Dictionary _dictionary;
     private IDataStorage<Word> _dataStorage;
+    private IDataStorage<string> _typeDataStorage;
     private string _dictionaryTypePath;
     private string _path;
     public AdminTools(User user, Logger logger)
@@ -18,6 +19,7 @@ public partial class AdminTools : Form
         _logger = logger;
         _dictionary = new Dictionary();
         _dataStorage = new FileWordsDataStorage();
+        _typeDataStorage = new TypeDataStorage();
         _dictionaryTypePath = "dictionaryType.txt";
         InitializeComponent();
     }
@@ -44,9 +46,14 @@ public partial class AdminTools : Form
     private void allWordBtn_Click(object sender, EventArgs e)
     {
         mainRtb.Clear();
-        if (!string.IsNullOrEmpty(_dictionary.ShowAllWordsAndTrans()))
+        if (dictionaryTypeB.SelectedIndex != -1)
         {
+            
             mainRtb.Text = _dictionary.ShowAllWordsAndTrans();
+            if (string.IsNullOrEmpty(mainRtb.Text))
+            {
+                mainRtb.Text = "No word found in the dictionary";
+            }
         }
         else
         {
@@ -62,7 +69,7 @@ public partial class AdminTools : Form
     }
     private void AdminTools_Load(object sender, EventArgs e)
     {
-        var types = _dictionary.GetTypesFromFile(_dictionaryTypePath);
+        var types = _typeDataStorage.Get(_dictionaryTypePath);
         dictionaryTypeB.Items.Clear();
         foreach (var item in types)
         {
@@ -86,19 +93,57 @@ public partial class AdminTools : Form
     }
     private void changeTransBtn_Click(object sender, EventArgs e)
     {
-        _dictionary.ChangeWord(userWordTb.Text, userNewWordTb.Text, _path);
+        _dictionary.ChangeTrans(userWordTb.Text, userTransTb.Text,userNewTransTb.Text, _path);
         mainRtb.Text = _dictionary.ShowAllWordsAndTrans();
     }
-
     private void addDictionaryBtn_Click(object sender, EventArgs e)
     {
-        //додаваня нового словника
-    }
+        var type = userDictionatyTypeTb.Text;
 
+        if (!string.IsNullOrEmpty(type))
+        {
+            try
+            {
+                _dictionary.CreateDictionary(type, _dictionaryTypePath);
+                List<string> types = new List<string>();
+
+                types = _typeDataStorage.Get(_dictionaryTypePath);
+                dictionaryTypeB.Items.Clear();
+                foreach (var item in types)
+                {
+                    dictionaryTypeB.Items.Add(item);
+                }
+
+                MessageBox.Show("New dictionary has been successfully created.\nIf you want, create the first word in it");
+                _logger.Information("New dictionary has been successfully created!");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, $"{ex.Message}");
+            }
+            
+        }
+        else
+        {
+            MessageBox.Show("Enter dictionary type!");
+            _logger.Error("User enters incorrect type!");
+        }
+    }
     private void addNewWord_Click(object sender, EventArgs e)
     {
-        //додавання нового слова
+        if (dictionaryTypeB.SelectedIndex != -1)
+        {
+            var newWord = new NewWord(_logger, _dictionary, _path);
+
+            newWord.ShowDialog();
+
+            mainRtb.Clear();
+            mainRtb.Text = _dictionary.ShowAllWordsAndTrans();
+        }
+        else
+        {
+            MessageBox.Show("Please select a dictionary");
+        }
     }
-    //зробити пароль через хеш
-    //розібратися з загрузкою типів словника
+
 }

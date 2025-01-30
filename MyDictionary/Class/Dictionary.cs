@@ -10,27 +10,14 @@ public class Dictionary
     public List<Word> words { get; set; }
     public string Type { get; set; }
     private IDataStorage<Word> _dataStorage;
+    private IDataStorage<string> _typeDataStorage;
     public Dictionary()
     {
         words = new List<Word>();
         _dataStorage = new FileWordsDataStorage();
+        _typeDataStorage = new TypeDataStorage();
     }
 
-    public List<string> GetTypesFromFile(string path)
-    {
-        List<string> types = new List<string>();
-        using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-        {
-            using (var sr = new StreamReader(fs))
-            {
-                while (!sr.EndOfStream)
-                {
-                    types.Add(sr.ReadLine());
-                }
-            }
-        }
-        return types;
-    }
     public string ShowAllWordsAndTrans()
     {
         try
@@ -265,7 +252,6 @@ public class Dictionary
             return;
         }
     }
-
     public void ChangeTrans(string word,string trans,string newTrans,string path)
     {
         word = word.Trim();
@@ -288,6 +274,106 @@ public class Dictionary
             return;
         }
 
-        //заміна перекладу
+        var wordInDictionary = words.FirstOrDefault(u => u.WordOriginal.Equals(word, StringComparison.OrdinalIgnoreCase));
+
+        if (wordInDictionary != null)
+        {
+            var transIndex = wordInDictionary.Translations.FindIndex(u => u.Equals(trans, StringComparison.OrdinalIgnoreCase));
+            if(transIndex != -1)
+            {
+                wordInDictionary.Translations[transIndex] = newTrans;
+                _dataStorage.Save(words, path);
+                MessageBox.Show($"Translation was successfully replaced with '{newTrans}'.");
+            }
+            else
+            {
+                MessageBox.Show($"Translation not found in the dictionary.");
+            }
+        }
+        else
+        {
+            MessageBox.Show($"Word not found in the dictionary.");
+        }
+    }
+    public void AddWord(string word,string type,string symonym,string about,string trans,string path)
+    {
+        var originalWord = word.Trim();
+        var typeWord = type.Trim();
+        var synonym = symonym.Trim();
+        var aboutWord = about.Trim();
+        var translations = trans.Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+        if (string.IsNullOrEmpty(originalWord))
+        {
+            MessageBox.Show("Please enter word.");
+            return;
+        }
+        if (words.Any(u => u.WordOriginal.Equals(originalWord, StringComparison.OrdinalIgnoreCase)))
+        {
+            MessageBox.Show("Such a word is already in the dictionary.");
+            return;
+        }
+        if (string.IsNullOrEmpty(typeWord))
+        {
+            MessageBox.Show("Please enter the word type.");
+            return;
+        }
+        if (string.IsNullOrEmpty(synonym))
+        {
+            MessageBox.Show("Please enter the word synonym.");
+            return;
+        }
+        if (string.IsNullOrEmpty(aboutWord))
+        {
+            MessageBox.Show("Please enter about word.");
+            return;
+        }
+        if (translations.Length == 0)
+        {
+            MessageBox.Show("Please add at least one translation.");
+            return;
+        }
+
+        var newWord = new Word()
+        {
+            WordOriginal = originalWord,
+            TypeWord = typeWord,
+            Synonym = synonym,
+            AboutWord = aboutWord,
+        };
+        newWord.Translations = translations.ToList();
+
+        words.Add(newWord);
+        _dataStorage.Save(words, path);
+
+        MessageBox.Show("Word successfully added");   
+    }
+
+    public void CreateDictionary(string type,string path)
+    {
+        List<string> types = new List<string>();
+        types = _typeDataStorage.Get(path);
+        if (types.Contains(type))
+        {
+            MessageBox.Show($"Dictionary '{type}' already exists.");
+            throw new ArgumentException();
+        }
+        types.Add(type);
+        _typeDataStorage.Save(types, path);
+
+        List<Word> tempWord = new List<Word>();
+        using (var fs = new FileStream($"{type}.json",FileMode.Create,FileAccess.Write))
+        {
+            var options = new JsonSerializerOptions
+            {
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                WriteIndented = true
+            };
+            using (var sw = new StreamWriter(fs))
+            {
+                var json = JsonSerializer.Serialize(words, options);
+                sw.WriteLine(json);
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ public partial class Menu : Form
     private string _path;
     private Dictionary _dictionary;
     private IDataStorage<Word> _dataStorage;
+    private IDataStorage<string> _typeDataStorage;
     private readonly Logger _logger;
     private string _dictionaryTypePath;
     public Menu(bool admin, User user,Logger logger)
@@ -20,6 +21,7 @@ public partial class Menu : Form
         _user = user;
         _dictionary = new Dictionary();
         _dataStorage = new FileWordsDataStorage();
+        _typeDataStorage = new TypeDataStorage();
         _dictionaryTypePath = "dictionaryType.txt";
         InitializeComponent();
     }
@@ -46,7 +48,7 @@ public partial class Menu : Form
             adminToolsLb.Visible = false;
         }
 
-        var types = _dictionary.GetTypesFromFile(_dictionaryTypePath);
+        var types = _typeDataStorage.Get(_dictionaryTypePath);
         dictionaryTypeB.Items.Clear();
         foreach (var item in types)
         {
@@ -62,9 +64,13 @@ public partial class Menu : Form
     private void allWordBtn_Click(object sender, EventArgs e)
     {
         mainRtb.Clear();
-        if (!string.IsNullOrEmpty(_dictionary.ShowAllWordsAndTrans()))
+        if (dictionaryTypeB.SelectedIndex != -1)
         {
             mainRtb.Text = _dictionary.ShowAllWordsAndTrans();
+            if (string.IsNullOrEmpty(mainRtb.Text))
+            {
+                mainRtb.Text = "No word found in the dictionary";
+            }
         }
         else
         {

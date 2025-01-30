@@ -23,7 +23,7 @@ internal class FileWordsDataStorage : IDataStorage<Word>
 
     public void Save(List<Word> words, string path)
     {
-        using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+        using (var fs = new FileStream(path, FileMode.Open, FileAccess.Write))
         {
             var options = new JsonSerializerOptions
             {

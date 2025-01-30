@@ -52,6 +52,8 @@
             userNewTransTb = new TextBox();
             panel5 = new Panel();
             userNewWordTb = new TextBox();
+            panel6 = new Panel();
+            userDictionatyTypeTb = new TextBox();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -335,13 +337,35 @@
             userNewWordTb.Size = new Size(127, 18);
             userNewWordTb.TabIndex = 20;
             // 
+            // panel6
+            // 
+            panel6.BackColor = Color.Black;
+            panel6.Location = new Point(509, 418);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(270, 3);
+            panel6.TabIndex = 21;
+            // 
+            // userDictionatyTypeTb
+            // 
+            userDictionatyTypeTb.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            userDictionatyTypeTb.BorderStyle = BorderStyle.None;
+            userDictionatyTypeTb.Font = new Font("Lucida Sans", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            userDictionatyTypeTb.Location = new Point(509, 394);
+            userDictionatyTypeTb.MaxLength = 20;
+            userDictionatyTypeTb.Name = "userDictionatyTypeTb";
+            userDictionatyTypeTb.PlaceholderText = "Enter dictionary type (like ua-eng)";
+            userDictionatyTypeTb.Size = new Size(269, 18);
+            userDictionatyTypeTb.TabIndex = 20;
+            // 
             // AdminTools
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(801, 450);
             Controls.Add(userNewWordTb);
+            Controls.Add(userDictionatyTypeTb);
             Controls.Add(userWordTb);
+            Controls.Add(panel6);
             Controls.Add(panel5);
             Controls.Add(panel3);
             Controls.Add(userNewTransTb);
@@ -399,5 +423,7 @@
         private TextBox userNewTransTb;
         private Panel panel5;
         private TextBox userNewWordTb;
+        private Panel panel6;
+        private TextBox userDictionatyTypeTb;
     }
 }
