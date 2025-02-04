@@ -171,7 +171,7 @@ public class Dictionary
         if (words.Count < wordsCount)
         {
             _dataStorage.Save(words,path);
-            MessageBox.Show("Word change successfully");
+            MessageBox.Show("Word deleted successfully");
         }
         else
         {
@@ -371,7 +371,7 @@ public class Dictionary
             };
             using (var sw = new StreamWriter(fs))
             {
-                var json = JsonSerializer.Serialize(words, options);
+                var json = JsonSerializer.Serialize(tempWord, options);
                 sw.WriteLine(json);
             }
         }

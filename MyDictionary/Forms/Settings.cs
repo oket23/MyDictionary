@@ -61,15 +61,18 @@ public partial class Settings : Form
     {
         try
         {
+            _userService.users = _dataStorage.Get(_path);
             var newBdate = DateTime.Parse(newBdayTb.Text);
             _user.BDate = newBdate;
-            _userService.DeleteUser(_user,_path);
-            _userService.users.Add(_user);
-            _dataStorage.Save(_userService.users, _path);
+
+            var updatedUsers = _userService.DeleteUser(_user, _path);
+            updatedUsers.Add(_user);
+
+            _dataStorage.Save(updatedUsers, _path);
 
             bDayLb.Text = $"Your date of birth: {_user.BDate.ToShortDateString()}";
             MessageBox.Show("You have successfully changed your date of birth");
-            _logger.Information($"User successfully changed password");
+            _logger.Information("User successfully changed their date of birth.");
         }
         catch (Exception ex)
         {
@@ -77,27 +80,44 @@ public partial class Settings : Form
             _logger.Error($"{ex} {ex.Message}");
         }
     }
+
+
     private void changeBtn_Click(object sender, EventArgs e)
     {
+        _userService.users = _dataStorage.Get(_path);
         var oldPassword = oldPasswordTb.Text.Trim();
         var newPassword = newPasswordTb.Text.Trim();
 
-        if (BCrypt.Net.BCrypt.Verify(oldPassword, _user.Password))
+        if (string.IsNullOrWhiteSpace(oldPassword) || string.IsNullOrWhiteSpace(newPassword))
         {
-            _user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
-
-            _userService.users = _userService.DeleteUser(_user, _path);
-            _userService.users.Add(_user);
-            _dataStorage.Save(_userService.users, _path);
-
-            MessageBox.Show("You have successfully changed the password");
-            _logger.Information("User successfully changed the password");
+            MessageBox.Show("Passwords cannot be empty");
+            _logger.Error("User tried to change password with empty fields");
+            return;
         }
-        else
+
+        if (!BCrypt.Net.BCrypt.Verify(oldPassword, _user.Password))
         {
             MessageBox.Show("You entered an incorrect password");
             _logger.Error("User entered incorrect password");
+            return;
         }
+
+        if (oldPassword == newPassword)
+        {
+            MessageBox.Show("The new password cannot be the same as the old one");
+            _logger.Warning("User tried to change password to the same one");
+            return;
+        }
+
+        _user.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+        _userService.users = _userService.DeleteUser(_user, _path);
+        _userService.users.Add(_user); 
+
+        _dataStorage.Save(_userService.users, _path); 
+
+        MessageBox.Show("You have successfully changed the password");
+        _logger.Information("User successfully changed the password");
     }
+
 
 }

@@ -28,7 +28,6 @@ public class UserService
     }
     public bool IsValidLoginAndPassword(string login, string password, List<User> users)
     {
-        var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
         var user = users.FirstOrDefault(u => u.Login == login);
         if (user == null)
         {
@@ -36,7 +35,7 @@ public class UserService
             _logger.Error("User enters incorrect login.");
             return false;
         }
-        if (BCrypt.Net.BCrypt.Verify(user.Password, passwordHash))
+        if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
         {
             MessageBox.Show("Incorrect password.");
             _logger.Error("User enters incorrect password.");
